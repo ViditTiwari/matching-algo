@@ -63,18 +63,39 @@ class AdjacencyMatrix
 int main()
 {
     int nodes, max_edges, origin, destin;
-    cout<<"Enter number of nodes: ";
-    
+    cout<<"Enter number of Girls: ";
     cin>>nodes;
+
+    if(nodes>10)
+        {
+            cout<<"\n\nWell you got a big nuber there. You have to enter at least one choice for each girl for matching to exist.\n\n";
+        }
+    else
+        {
+            cout<<"\n\nRemember you have to enter at least one choice for each girl for matching to exist\n\n";
+        }
+
     AdjacencyMatrix am(nodes);
     max_edges = nodes * nodes;
-    for (int i = 0; i < max_edges; i++)
-    {
-        cout<<"Enter edge (-1 -1 to exit): ";
-        cin>>origin>>destin;
-        if((origin == -1) && (destin == -1))
-            break;
-        am.add_edge(origin, destin);
+
+    for (int i = 0; i < nodes; i++)
+    {   
+        cout<<"Enter choice for Girl "<<i+1<<" : ";
+        for(int j=0; j < nodes; j++)
+            {   if(j==0)
+                cin>>destin;
+
+                else
+                {   cout<<"Enter -1 to stop filling choices for Girl "<<i+1<<" : ";
+                    cin>>destin;
+                    
+                    if((destin == -1))
+                        break;
+                }
+
+                am.add_edge(i+1, destin);
+            }
+        cout<<endl;
     }
     am.display();
     return 0;
