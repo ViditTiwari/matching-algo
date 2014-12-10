@@ -4,7 +4,6 @@
 #include <iostream>
 #include <cstdlib>
 using namespace std;
-#define MAX 20
 /*
  * Adjacency Matrix Class
  */
@@ -56,7 +55,54 @@ class AdjacencyMatrix
                 cout<<endl;
             }
         }
+
+        int connected(int i, int j)
+        {
+            if(adj[i][j]==1)
+                return 1;
+            else
+                return 0;
+        }
 };
+
+void printSet(int array[],int size){
+    int i;
+
+    for (i=1;i<=size;i++)
+        cout << array[i] << " ";
+        cout << endl;
+
+    return;
+}
+
+void printPowerset (int n){
+    int stack[n+1],k,ctr;
+
+    stack[0]=0; /* 0 is not considered as part of the set */
+    k = 0;
+    ctr=0;
+
+    while(1){
+        if (stack[k]<n){
+            stack[k+1] = stack[k] + 1;
+            k++;
+        }
+
+        else{
+            stack[k-1]++;
+            k--;
+        }
+
+        if (k==0)
+            break;
+        ctr++;
+        printSet(stack,k);
+    }
+    cout<<"\nTotal no. of Subsets are: "<<ctr;
+
+    return;
+}
+
 /*
  * Main
  */
@@ -68,7 +114,7 @@ int main()
 
     if(nodes>10)
         {
-            cout<<"\n\nWell you got a big nuber there. You have to enter at least one choice for each girl for matching to exist.\n\n";
+            cout<<"\n\nWell you got a big number there. You have to enter at least one choice for each girl for matching to exist.\n\n";
         }
     else
         {
@@ -79,7 +125,7 @@ int main()
     max_edges = nodes * nodes;
 
     for (int i = 0; i < nodes; i++)
-    {   
+    {
         cout<<"Enter choice for Girl "<<i+1<<" : ";
         for(int j=0; j < nodes; j++)
             {   if(j==0)
@@ -88,7 +134,7 @@ int main()
                 else
                 {   cout<<"Enter -1 to stop filling choices for Girl "<<i+1<<" : ";
                     cin>>destin;
-                    
+
                     if((destin == -1))
                         break;
                 }
@@ -98,5 +144,6 @@ int main()
         cout<<endl;
     }
     am.display();
+    printPowerset(nodes);
     return 0;
 }
