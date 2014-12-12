@@ -112,7 +112,7 @@ void printPowerset (int n, AdjacencyMatrix am){
 
         if (k==0)
             break;
-        ctr++;
+
         val = ConnectedSet(stack,k,n,am);
 
         if(val==0){
@@ -121,6 +121,7 @@ void printPowerset (int n, AdjacencyMatrix am){
             cout<<"\n\n-------------------------\n\n";
             break;
         }
+        ctr++;
     }
     if(ctr==(pow(2,n)-1)){
         cout<<"\n\n---------------\n";
