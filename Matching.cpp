@@ -66,7 +66,7 @@ class AdjacencyMatrix
         }
 };
 
-int printSet(int array[],int size,int n, AdjacencyMatrix am){
+int ConnectedSet(int array[],int size,int n, AdjacencyMatrix am){
     int i,j,connectedness;
     connectedness=0;
     for(i=1;i<=n;i++)
@@ -113,7 +113,7 @@ void printPowerset (int n, AdjacencyMatrix am){
         if (k==0)
             break;
         ctr++;
-        val = printSet(stack,k,n,am);
+        val = ConnectedSet(stack,k,n,am);
 
         if(val==0){
             cout<<"\n\n-------------------------\n\n";
