@@ -1,5 +1,5 @@
 /*
- * C++ Program to Implement Adjacency Matrix
+ * C++ Program to check if Complete Matching exists or not
  */
 #include <iostream>
 #include <cstdlib>
@@ -65,24 +65,36 @@ class AdjacencyMatrix
         }
 };
 
-void printSet(int array[],int size){
-    int i;
+void printSet(int array[],int size,int n, AdjacencyMatrix am){
+    int i,j,connectedness;
+    connectedness=0;
+    for(i=1;i<=n;i++)
+        {   for (j=1;j<=size;j++)
+                {
+                    //cout << array[j] << " ";
+                    //cout << endl;
+                    int index;
+                    index = array[j];
+                    if(am.connected(index-1,i-1)){
+                        connectedness++;
+                        break;
+                    }
+                }
+        }
 
-    for (i=1;i<=size;i++)
-        cout << array[i] << " ";
-        cout << endl;
 
-    return;
 }
 
-void printPowerset (int n){
+void printPowerset (int n, AdjacencyMatrix am){
     int stack[n+1],k,ctr;
 
     stack[0]=0; /* 0 is not considered as part of the set */
     k = 0;
     ctr=0;
 
+
     while(1){
+
         if (stack[k]<n){
             stack[k+1] = stack[k] + 1;
             k++;
@@ -96,9 +108,9 @@ void printPowerset (int n){
         if (k==0)
             break;
         ctr++;
-        printSet(stack,k);
+        printSet(stack,k,n,am);
+
     }
-    cout<<"\nTotal no. of Subsets are: "<<ctr;
 
     return;
 }
@@ -144,6 +156,6 @@ int main()
         cout<<endl;
     }
     am.display();
-    printPowerset(nodes);
+    printPowerset(nodes, am);
     return 0;
 }
