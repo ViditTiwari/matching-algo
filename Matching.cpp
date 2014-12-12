@@ -3,6 +3,7 @@
  */
 #include <iostream>
 #include <cstdlib>
+#include <cmath>
 using namespace std;
 /*
  * Adjacency Matrix Class
@@ -65,7 +66,7 @@ class AdjacencyMatrix
         }
 };
 
-void printSet(int array[],int size,int n, AdjacencyMatrix am){
+int printSet(int array[],int size,int n, AdjacencyMatrix am){
     int i,j,connectedness;
     connectedness=0;
     for(i=1;i<=n;i++)
@@ -82,16 +83,20 @@ void printSet(int array[],int size,int n, AdjacencyMatrix am){
                 }
         }
 
+    if(connectedness>=size)
+        return 1;
+    else
+        return 0;
 
 }
 
 void printPowerset (int n, AdjacencyMatrix am){
-    int stack[n+1],k,ctr;
+    int stack[n+1],k,ctr, val;
 
     stack[0]=0; /* 0 is not considered as part of the set */
     k = 0;
     ctr=0;
-
+    val=1;
 
     while(1){
 
@@ -108,7 +113,19 @@ void printPowerset (int n, AdjacencyMatrix am){
         if (k==0)
             break;
         ctr++;
-        printSet(stack,k,n,am);
+        val = printSet(stack,k,n,am);
+
+        if(val==0){
+            cout<<"\n\n-------------------------\n\n";
+            cout<<"\n\nMATCHING DOES NOT EXIST\n\n";
+            cout<<"\n\n-------------------------\n\n";
+            break;
+        }
+    }
+    if(ctr==(pow(2,n)-1)){
+        cout<<"\n\n---------------\n";
+        cout<<"\n\nMATCHING EXIST\n\n";
+        cout<<"\n---------------\n\n";
 
     }
 
